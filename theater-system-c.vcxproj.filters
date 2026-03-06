@@ -21,5 +21,13 @@
     <ClCompile Include="src\mian.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="zjz_p.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="zjz_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
