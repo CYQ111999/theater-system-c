@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 
-int main()
+int main2()
 {
 	int a = 0x12345678;
 	int b = 0x87654321;
