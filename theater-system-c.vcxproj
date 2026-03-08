@@ -118,14 +118,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="aaa.c" />
-    <ClCompile Include="src\mian.c" />
-    <ClCompile Include="zjz_p.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="zjz_p.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
