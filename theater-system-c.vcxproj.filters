@@ -19,6 +19,24 @@
     <Filter Include="Source Files\tests">
       <UniqueIdentifier>{6f62514b-f37d-4eeb-84c4-6ede19c9fbab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{b5d9165d-c172-4947-8b1d-6f0a0b9b102d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Service">
+      <UniqueIdentifier>{4c768dd9-5c0f-4f88-ae85-1977b47fc707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Persistence">
+      <UniqueIdentifier>{bd4a0119-67f8-40ec-aad6-05ab883114ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{cacccfde-565e-4184-ad94-17c75d166ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Service">
+      <UniqueIdentifier>{413f4d03-a9da-46c2-be71-0260414248b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Persistence">
+      <UniqueIdentifier>{23c8f12f-16a6-4bdf-b708-449a901d314d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
