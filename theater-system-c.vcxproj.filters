@@ -111,6 +111,27 @@
     <ClInclude Include="EntityKey.h">
       <Filter>Header Files\Service</Filter>
     </ClInclude>
+    <ClInclude Include="Studio_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Play_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Schedule_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticket_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Sale_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Account_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
+    <ClInclude Include="Seat_Persist.h">
+      <Filter>Header Files\Persistence</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entitykey_Persist.c">
