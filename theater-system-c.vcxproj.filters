@@ -132,13 +132,13 @@
     <ClInclude Include="Seat_Persist.h">
       <Filter>Header Files\Persistence</Filter>
     </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entitykey_Persist.c">
       <Filter>Source Files\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="TTMS.c">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main_Menu.c">
       <Filter>Source Files\View</Filter>
@@ -148,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="Utils.h">
       <Filter>Header Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="TTMS.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
