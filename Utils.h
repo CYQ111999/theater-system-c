@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "Common.h"
+#include "List.h"
 
 // 下面开始都是文件了
 

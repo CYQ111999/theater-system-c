@@ -5,6 +5,7 @@
 #define LIST_H
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 // 链表节点结构，按教材要求必须放在每个业务节点开头
 typedef struct list_node {
@@ -20,14 +21,20 @@ typedef struct {
     void* curPos;       // 当前页第一个节点在哪
 } paging_t;
 
+// 辅助宏：从数据节点获取list_node_t指针
+#define LIST_NODE(ptr) ((list_node_t*)(ptr))
+
+// 辅助宏：从list_node_t指针获取数据节点指针
+#define LIST_DATA(ptr) ((void*)(ptr))
+
 // 下面是链表操作的宏，教材表2.3里的
 // 初始化链表
 #define List_Init(list, node_t) \
     do { \
         (list) = (node_t*)malloc(sizeof(node_t)); \
         if(list) { \
-            (list)->prev = (list); \
-            (list)->next = (list); \
+            LIST_NODE(list)->prev = LIST_NODE(list); \
+            LIST_NODE(list)->next = LIST_NODE(list); \
         } \
     } while(0)
 
@@ -35,14 +42,15 @@ typedef struct {
 #define List_Free(list, node_t) \
     do { \
         if(list) { \
-            node_t* cur = (list)->next; \
-            while(cur != (list)) { \
-                node_t* next_node = cur->next; \
-                free(cur); \
-                cur = next_node; \
+            list_node_t* cur_node = LIST_NODE(list)->next; \
+            while(cur_node != LIST_NODE(list)) { \
+                list_node_t* next_node = cur_node->next; \
+                void* data_node = LIST_DATA(cur_node); \
+                free(data_node); \
+                cur_node = next_node; \
             } \
-            (list)->prev = (list); \
-            (list)->next = (list); \
+            LIST_NODE(list)->prev = LIST_NODE(list); \
+            LIST_NODE(list)->next = LIST_NODE(list); \
         } \
     } while(0)
 
@@ -60,10 +68,10 @@ typedef struct {
 #define List_AddHead(list, new_node) \
     do { \
         if((list) && (new_node)) { \
-            ((list_node_t*)new_node)->next = (list)->next; \
-            ((list_node_t*)new_node)->prev = (list); \
-            (list)->next->prev = (list_node_t*)new_node; \
-            (list)->next = (list_node_t*)new_node; \
+            LIST_NODE(new_node)->next = LIST_NODE(list)->next; \
+            LIST_NODE(new_node)->prev = LIST_NODE(list); \
+            LIST_NODE(list)->next->prev = LIST_NODE(new_node); \
+            LIST_NODE(list)->next = LIST_NODE(new_node); \
         } \
     } while(0)
 
@@ -71,10 +79,10 @@ typedef struct {
 #define List_AddTail(list, new_node) \
     do { \
         if((list) && (new_node)) { \
-            ((list_node_t*)new_node)->prev = (list)->prev; \
-            ((list_node_t*)new_node)->next = (list); \
-            (list)->prev->next = (list_node_t*)new_node; \
-            (list)->prev = (list_node_t*)new_node; \
+            LIST_NODE(new_node)->prev = LIST_NODE(list)->prev; \
+            LIST_NODE(new_node)->next = LIST_NODE(list); \
+            LIST_NODE(list)->prev->next = LIST_NODE(new_node); \
+            LIST_NODE(list)->prev = LIST_NODE(new_node); \
         } \
     } while(0)
 
@@ -82,10 +90,10 @@ typedef struct {
 #define List_InsertBefore(node, new_node) \
     do { \
         if((node) && (new_node)) { \
-            ((list_node_t*)new_node)->prev = ((list_node_t*)node)->prev; \
-            ((list_node_t*)new_node)->next = (list_node_t*)node; \
-            ((list_node_t*)node)->prev->next = (list_node_t*)new_node; \
-            ((list_node_t*)node)->prev = (list_node_t*)new_node; \
+            LIST_NODE(new_node)->prev = LIST_NODE(node)->prev; \
+            LIST_NODE(new_node)->next = LIST_NODE(node); \
+            LIST_NODE(node)->prev->next = LIST_NODE(new_node); \
+            LIST_NODE(node)->prev = LIST_NODE(new_node); \
         } \
     } while(0)
 
@@ -93,25 +101,26 @@ typedef struct {
 #define List_InsertAfter(node, new_node) \
     do { \
         if((node) && (new_node)) { \
-            ((list_node_t*)new_node)->next = ((list_node_t*)node)->next; \
-            ((list_node_t*)new_node)->prev = (list_node_t*)node; \
-            ((list_node_t*)node)->next->prev = (list_node_t*)new_node; \
-            ((list_node_t*)node)->next = (list_node_t*)new_node; \
+            LIST_NODE(new_node)->next = LIST_NODE(node)->next; \
+            LIST_NODE(new_node)->prev = LIST_NODE(node); \
+            LIST_NODE(node)->next->prev = LIST_NODE(new_node); \
+            LIST_NODE(node)->next = LIST_NODE(new_node); \
         } \
     } while(0)
 
 // 判断链表是不是空的
 #define List_IsEmpty(list) \
-    ((list) == NULL ? true : ((list)->next == (list) && (list)->prev == (list)))
+    ((list) == NULL ? true : (LIST_NODE(list)->next == LIST_NODE(list) && \
+                              LIST_NODE(list)->prev == LIST_NODE(list)))
 
 // 从链表中移除节点（不删内存）
 #define List_DelNode(node) \
     do { \
         if(node) { \
-            ((list_node_t*)node)->prev->next = ((list_node_t*)node)->next; \
-            ((list_node_t*)node)->next->prev = ((list_node_t*)node)->prev; \
-            ((list_node_t*)node)->next = (list_node_t*)node; \
-            ((list_node_t*)node)->prev = (list_node_t*)node; \
+            LIST_NODE(node)->prev->next = LIST_NODE(node)->next; \
+            LIST_NODE(node)->next->prev = LIST_NODE(node)->prev; \
+            LIST_NODE(node)->next = LIST_NODE(node); \
+            LIST_NODE(node)->prev = LIST_NODE(node); \
         } \
     } while(0)
 
@@ -126,15 +135,17 @@ typedef struct {
 
 // 遍历链表
 #define List_ForEach(list, cur) \
-    for((cur) = (list)->next; (cur) != (list); (cur) = (cur)->next)
+    for((cur) = (void*)LIST_NODE(list)->next; \
+        (cur) != (void*)LIST_NODE(list); \
+        (cur) = (void*)LIST_NODE(cur)->next)
 
 // 下面是分页的宏，教材表2.4里的
 // 定位到指定偏移
 #define List_Paging(list, pg, node_t) \
     do { \
         int _cnt = 0; \
-        node_t* _p = (list)->next; \
-        while(_cnt < (pg).offset && _p != (list)) { \
+        list_node_t* _p = LIST_NODE(list)->next; \
+        while(_cnt < (pg).offset && _p != LIST_NODE(list)) { \
             _cnt++; \
             _p = _p->next; \
         } \
@@ -145,7 +156,7 @@ typedef struct {
 #define Paging_Locate_FirstPage(list, pg) \
     do { \
         (pg).offset = 0; \
-        (pg).curPos = (void*)((list)->next); \
+        (pg).curPos = (void*)(LIST_NODE(list)->next); \
     } while(0)
 
 // 到最后一页
@@ -156,7 +167,7 @@ typedef struct {
             _tmp = (pg).pageSize; \
         } \
         (pg).offset = (pg).totalRecords - _tmp; \
-        node_t* _pos = (list)->prev; \
+        list_node_t* _pos = LIST_NODE(list)->prev; \
         for(; _tmp > 1; _tmp--) { \
             _pos = _pos->prev; \
         } \
@@ -180,7 +191,7 @@ typedef struct {
 #define Paging_ViewPage_ForEach(list, pg, node_t, pos, i) \
     for((i) = 0, (pos) = (node_t*)(pg).curPos; \
         (pos) != (list) && (i) < (pg).pageSize; \
-        (i)++, (pos) = (pos)->next)
+        (i)++, (pos) = (node_t*)LIST_NODE(pos)->next)
 
 // 算当前是第几页
 #define Pageing_CurPage(pg) \

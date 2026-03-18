@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="Account_Persist.h" />
+    <ClInclude Include="Account_Srv.h" />
     <ClInclude Include="Account_UI.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="EntityKey.h" />
@@ -53,10 +54,9 @@
     <ClInclude Include="Ticket_Persist.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Entitykey_Persist.c" />
-    <ClCompile Include="EntKey.c" />
-    <ClCompile Include="Main_Menu.c" />
-    <ClCompile Include="TTMS.c" />
+    <ClCompile Include="account.c" />
+    <ClCompile Include="Account_Srv.c" />
+    <ClCompile Include="Account_UI.c" />
     <ClCompile Include="Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
