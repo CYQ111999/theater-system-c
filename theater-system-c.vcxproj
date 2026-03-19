@@ -59,6 +59,7 @@
     <ClCompile Include="Account_UI.c" />
     <ClCompile Include="Entitykey_Persist.c" />
     <ClCompile Include="EntKey.c" />
+    <ClCompile Include="MaiAccount_UI.c" />
     <ClCompile Include="Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

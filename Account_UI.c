@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <conio.h>
 
+account_t gl_CurUser = { 0 };
 
 // 清屏函数
 #ifdef _WIN32
@@ -1160,6 +1161,7 @@ int SysLogin() {
 						printf("═══════════════════════════════════════════════════════\n");
 						printf("用户类型: %s\n", getAccountTypeString(first_user->data.type));
 						printf("═══════════════════════════════════════════════════════\n");
+						gl_CurUser = first_user->data;
 						break;
 					}
 				}

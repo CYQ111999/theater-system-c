@@ -158,5 +158,8 @@
     <ClCompile Include="EntKey.c">
       <Filter>Source Files\Service</Filter>
     </ClCompile>
+    <ClCompile Include="MaiAccount_UI.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
