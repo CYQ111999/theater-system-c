@@ -55,3 +55,7 @@ dkms.conf
 *.dwo
 .vs/
 theater-system-c/
+theater-system-c.vcxproj
+theater-system-c.vcxproj.user
+theater-system-c.vcxproj.filters
+theater-system-c.sln
